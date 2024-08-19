@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    container_name: at-apigateway
+    environment:
+      - CONFIG_PATH=/usr/local/src/local.yaml
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - postgresql
+    networks:
+      - at
+  postgresql:
+    image: postgres:14-alpine
+    container_name: at-psql
+    environment:
+      - POSTGRES_DB=apigatway
+      - POSTGRES_USER=alex
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - at
+
+networks:
+  at:

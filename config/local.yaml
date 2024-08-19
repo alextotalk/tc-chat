@@ -1,0 +1,15 @@
+env: "local" #dev, prod
+
+
+db:
+  username: "alex"
+  host: "at-psql"
+  pg_port: "5432"
+  dbname: "apigatway"
+  sslmode: "disable"
+  password: "secret"
+
+http:
+  port: "8080"
+  timeout: "4s"
+  idle_timeout: "10s"
