@@ -48,9 +48,13 @@ To start the application along with the PostgreSQL database, run:
 make up
  
 This will start the services defined in the docker-compose.yml file.
+```
+### This will start the services on port http://localhost:8080.
 
 Stopping the Application
 To stop the running services, execute:
+```bash
+
 make down
 ```
 Makefile Commands
