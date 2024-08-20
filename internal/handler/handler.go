@@ -9,10 +9,14 @@ import (
 
 type Handler struct {
 	services *service.Service
+	mux      *http.ServeMux
 }
 
 func NewHandler(services *service.Service) *Handler {
-	return &Handler{services: services}
+	return &Handler{
+		services: services,
+		mux:      http.NewServeMux(),
+	}
 }
 
 var tpl = template.Must(template.ParseFiles("templates/index.html"))
@@ -32,14 +36,18 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func authHandler(w http.ResponseWriter, r *http.Request) {
 	var tpl = template.Must(template.ParseFiles("templates/auth.html"))
-	tpl.Execute(w, nil) // Write to response writer
+	err := tpl.Execute(w, nil)
+	if err != nil {
+		return
+	} // Write to response writer
 }
 
 func (h *Handler) initRoutes() {
-	h.HandleFunc("/", indexHandler)
-	h.HandleFunc("/auth", authHandler)
+	h.mux.HandleFunc("/", indexHandler)
+	h.mux.HandleFunc("/auth", authHandler)
 }
 
 func (h *Handler) NewRouter() *http.ServeMux {
+	h.initRoutes()
 	return h.mux
 }

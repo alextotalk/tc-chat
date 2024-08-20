@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build: .
@@ -10,6 +12,7 @@ services:
       - postgresql
     networks:
       - chat
+
   postgresql:
     image: postgres:14-alpine
     container_name: chat-psql
@@ -21,5 +24,7 @@ services:
       - ./data:/var/lib/postgresql/data
     networks:
       - chat
+
 networks:
   chat:
+    driver: bridge

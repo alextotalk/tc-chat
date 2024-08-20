@@ -12,7 +12,6 @@ type Server struct {
 
 func NewServer(handler *http.ServeMux) *Server {
 	return &Server{
-		mux: handler,
 		server: &http.Server{
 			Addr:    ":8080",
 			Handler: handler,
