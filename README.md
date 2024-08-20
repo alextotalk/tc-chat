@@ -1,6 +1,4 @@
-# Create the README.md file with the provided content
 
-readme_content = """
 # TC-Chat Application
 
 This is a Go-based chat application that uses Docker and Docker Compose for containerization. The application is built with a microservices architecture and leverages PostgreSQL as its database.
