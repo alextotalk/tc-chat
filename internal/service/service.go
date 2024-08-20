@@ -1,6 +1,8 @@
 package service
 
-import "internal/storage"
+import (
+	"github.com/alextotalk/tc-chat/internal/storage"
+)
 
 type Service struct {
 	repo *storage.Repository

@@ -3,12 +3,12 @@ package app
 import (
 	"context"
 	"errors"
-	"internal/config"
-	"internal/handler"
-	"internal/server"
-	"internal/service"
-	"internal/storage"
-	"internal/storage/pg"
+	"github.com/alextotalk/tc-chat/internal/config"
+	"github.com/alextotalk/tc-chat/internal/handler"
+	"github.com/alextotalk/tc-chat/internal/server"
+	"github.com/alextotalk/tc-chat/internal/service"
+	"github.com/alextotalk/tc-chat/internal/storage"
+	"github.com/alextotalk/tc-chat/internal/storage/pg"
 
 	_ "github.com/jackc/pgx/v5"
 	"log/slog"

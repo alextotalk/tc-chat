@@ -1,9 +1,10 @@
 package handler
 
 import (
+	"github.com/alextotalk/tc-chat/internal/domain"
+	"github.com/alextotalk/tc-chat/internal/service"
 	"html/template"
-	"internal/domain"
-	"internal/service"
+	"net/http"
 )
 
 type Handler struct {
@@ -16,7 +17,7 @@ func NewHandler(services *service.Service) *Handler {
 
 var tpl = template.Must(template.ParseFiles("templates/index.html"))
 
-func indexHandler(c echo.Context) error {
+func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// Pass any necessary data to the template (optional)
 	users := []domain.User{
 		{ID: 1, Name: "Alice"},
@@ -24,20 +25,21 @@ func indexHandler(c echo.Context) error {
 	}
 
 	data := map[string]interface{}{
-		"Users": users}
-	return tpl.Execute(c.Response().Writer, data) // Write to context's response writer
-
+		"Users": users,
+	}
+	tpl.Execute(w, data) // Write to response writer
 }
 
-func auth(c echo.Context) error {
+func authHandler(w http.ResponseWriter, r *http.Request) {
 	var tpl = template.Must(template.ParseFiles("templates/auth.html"))
-	return tpl.Execute(c.Response().Writer, c.Request())
+	tpl.Execute(w, nil) // Write to response writer
 }
 
-func (h *Handler) NewRouter() *echo.Echo {
-	e := echo.New()
+func (h *Handler) initRoutes() {
+	h.HandleFunc("/", indexHandler)
+	h.HandleFunc("/auth", authHandler)
+}
 
-	e.GET("/", indexHandler)
-	e.GET("/auth", auth)
-	return e
+func (h *Handler) NewRouter() *http.ServeMux {
+	return h.mux
 }

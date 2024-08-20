@@ -1,0 +1,10 @@
+.idea
+data
+.bin
+.DS_Store
+
+.env
+config/local.yaml
+
+# Visual Studio Settings
+.vscode.idea/

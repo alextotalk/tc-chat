@@ -1,6 +1,6 @@
 package main
 
-import "internal/app"
+import "github.com/alextotalk/tc-chat/internal/app"
 
 func main() {
 	app.Run()

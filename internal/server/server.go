@@ -1,23 +1,29 @@
 package server
 
 import (
-	"github.com/labstack/echo/v4"
-	"golang.org/x/net/context"
+	"context"
 	"net/http"
 )
 
 type Server struct {
-	e *echo.Echo // Використовуємо echo.Echo безпосередньо
+	mux    *http.ServeMux
+	server *http.Server
 }
 
-func NewServer(handler *echo.Echo) *Server {
-	return &Server{e: handler} // Призначаємо наданий екземпляр Echo
+func NewServer(handler *http.ServeMux) *Server {
+	return &Server{
+		mux: handler,
+		server: &http.Server{
+			Addr:    ":8080",
+			Handler: handler,
+		},
+	}
 }
 
 func (s *Server) Run() error {
-	return s.e.StartServer(&http.Server{Addr: ":8080"}) // Запускаємо сервер Echo
+	return s.server.ListenAndServe()
 }
 
 func (s *Server) Stop(ctx context.Context) error {
-	return s.e.Shutdown(ctx)
+	return s.server.Shutdown(ctx)
 }
