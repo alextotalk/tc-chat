@@ -1,6 +1,6 @@
 package main
 
-import "github.com/alextotalk/atanika/internal/app"
+import "internal/app"
 
 func main() {
 	app.Run()

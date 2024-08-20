@@ -1,6 +1,6 @@
 package service
 
-import "github.com/alextotalk/atanika/internal/storage"
+import "internal/storage"
 
 type Service struct {
 	repo *storage.Repository

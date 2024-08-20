@@ -1,10 +1,9 @@
 package handler
 
 import (
-	"github.com/alextotalk/atanika/internal/domain"
-	"github.com/alextotalk/atanika/internal/service"
-	"github.com/labstack/echo/v4"
 	"html/template"
+	"internal/domain"
+	"internal/service"
 )
 
 type Handler struct {

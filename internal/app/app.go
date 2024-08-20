@@ -3,12 +3,12 @@ package app
 import (
 	"context"
 	"errors"
-	"github.com/alextotalk/atanika/internal/config"
-	"github.com/alextotalk/atanika/internal/handler"
-	"github.com/alextotalk/atanika/internal/server"
-	"github.com/alextotalk/atanika/internal/service"
-	"github.com/alextotalk/atanika/internal/storage"
-	"github.com/alextotalk/atanika/internal/storage/pg"
+	"internal/config"
+	"internal/handler"
+	"internal/server"
+	"internal/service"
+	"internal/storage"
+	"internal/storage/pg"
 
 	_ "github.com/jackc/pgx/v5"
 	"log/slog"

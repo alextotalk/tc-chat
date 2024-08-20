@@ -9,13 +9,13 @@ import (
 type Config struct {
 	Env  string `yaml:"env" env:"ENV" env-default:"dev"`
 	Http `yaml:"http"`
-	PgDb `yaml:"apigatway"`
+	PgDb `yaml:"chat"`
 }
 
 type PgDb struct {
 	PgHost     string `yaml:"host" env:"HOST" env-default:"localhost"`
 	PgPort     string `yaml:"pg_port" env:"PORT" env-default:"5432"`
-	PgName     string `yaml:"dbname" env:"NAME" env-default:"apigatway"`
+	PgName     string `yaml:"dbname" env:"NAME" env-default:"chat"`
 	PgUser     string `yaml:"username" env:"USER" env-default:"alex"`
 	PgPassword string `yaml:"password" env:"PASSWORD" env-default:"secret"`
 	SSLMode    string `yaml:"sslmode" env:"SSL_MODE" env-default:"disable"`
