@@ -4,6 +4,9 @@ env:
 	export CONFIG_PATH="/home/alex/Projects/Golang/tc-chat/config/local.yaml"
 
 # Start the docker-compose services without setting CONFIG_PATH in docker-compose
+
+build:
+	docker-compose build
 up:
 	docker-compose up -d
 
