@@ -3,20 +3,21 @@ package app
 import (
 	"context"
 	"errors"
+
 	"github.com/alextotalk/tc-chat/internal/config"
 	"github.com/alextotalk/tc-chat/internal/handler"
 	"github.com/alextotalk/tc-chat/internal/server"
 	"github.com/alextotalk/tc-chat/internal/service"
 	"github.com/alextotalk/tc-chat/internal/storage"
 	"github.com/alextotalk/tc-chat/internal/storage/pg"
-
-	_ "github.com/jackc/pgx/v5"
+	
 	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+	
 )
 
 const (
