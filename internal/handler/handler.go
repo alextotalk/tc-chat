@@ -15,6 +15,7 @@ type Handler struct {
 
 func NewHandler(services *service.Service) *Handler {
 	return &Handler{
+		mux:      http.NewServeMux(),
 		services: services,
 	}
 }
