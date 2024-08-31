@@ -1,0 +1,32 @@
+package templates
+
+import (
+	"github.com/alextotalk/tc-chat/templates"
+)
+
+templ Base() {
+    <!DOCTYPE html>
+    <html lang="en">
+       <head>
+          <title>CARCASS!</title>
+          <link rel="icon" type="image/webp" href="/public/favicon.ico"/>
+          <meta charset="UTF-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <link rel="stylesheet" href="/public/styles.css"/>
+          <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+          <script src="https://unpkg.com/htmx.org@1.9.9" defer></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+          <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+       </head>
+       <body class="antialiased">
+          <div x-data="{ open: true, fullscreenModal: false }">
+
+          @components.Navigation()
+          { children...}
+
+          </div>
+
+       </body>
+    </html>
+}

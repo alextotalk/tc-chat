@@ -34,7 +34,7 @@ func Run() {
 
 	log := setupLogger(cfg.Env)
 	log.Info(
-		"starting atanika",
+		"starting ct-chat",
 		slog.String("env", cfg.Env),
 	)
 	log.Debug("debug messages are enabled")

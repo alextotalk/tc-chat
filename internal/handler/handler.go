@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"github.com/a-h/templ"
+	templates "github.com/alextotalk/tc-chat/templates/home"
 	"html/template"
 	"net/http"
 
@@ -36,7 +38,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) initRoutes() {
-	h.mux.HandleFunc("/", indexHandler)
+	h.mux.Handle("/", templ.Handler(templates.Index()))
 }
 
 func (h *Handler) NewRouter() *http.ServeMux {
