@@ -9,7 +9,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"github.com/alextotalk/tc-chat/templates"
+	"github.com/alextotalk/tc-chat/templates/components"
 )
 
 func Base() templ.Component {
