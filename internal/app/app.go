@@ -10,14 +10,13 @@ import (
 	"github.com/alextotalk/tc-chat/internal/service"
 	"github.com/alextotalk/tc-chat/internal/storage"
 	"github.com/alextotalk/tc-chat/internal/storage/pg"
-	
+	_ "github.com/jackc/pgx/v5"
 	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-	
 )
 
 const (

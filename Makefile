@@ -22,3 +22,6 @@ logs:
 restart: down up
 
 .PHONY: env up down logs restart
+
+gen:
+	templ generate
