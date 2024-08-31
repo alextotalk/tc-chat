@@ -1,6 +1,8 @@
 package domain
 
-import "time"
+import (
+	"time"
+)
 
 type User struct {
 	ID           int       `json:"id" bson:"_id,omitempty"`

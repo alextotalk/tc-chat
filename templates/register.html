@@ -1,0 +1,16 @@
+{{if .Success}}
+    <h1>Thanks for your message!</h1>
+{{else}}
+    <h1>Register</h1>
+    <form method="POST">
+        <label>Your name:</label><br />
+        <input type="text" name="name"><br />
+        <label>Email (note: the email must be unic):</label><br />
+        <input type="email" name="email"><br />
+        <label>Phone number:</label><br />
+        <textarea type="tel" name="phone"></textarea><br />
+        <label>Password:</label><br />
+        <input type="text" pattern="[A-Za-z0-9]{8,}"><br />
+        <input type="submit" text="join">
+    </form>
+{{end}}
