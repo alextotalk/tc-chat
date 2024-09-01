@@ -9,7 +9,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"github.com/alextotalk/tc-chat/templates/layots"
+	"github.com/alextotalk/tc-chat/templates/layouts"
 )
 
 func Index() templ.Component {

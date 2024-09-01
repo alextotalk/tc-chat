@@ -39,6 +39,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) initRoutes() {
 	h.mux.Handle("/", templ.Handler(templates.Index()))
+
 }
 
 func (h *Handler) NewRouter() *http.ServeMux {
