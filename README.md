@@ -26,7 +26,7 @@ Before you begin, ensure you have the following software installed on your machi
     ```
 3. **Build templ go files**:
 
-   Use the `Makefile` to build the Docker images.
+   Use the `Makefile` to build go files from templ components.
 
     ```bash
     make gen
