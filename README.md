@@ -1,17 +1,8 @@
 
 # TC-Chat Application
 
-This is a Go-based chat application that uses Docker and Docker Compose for containerization. The application is built with a microservices architecture and leverages PostgreSQL as its database.
+This is a Go-based chat application that uses Docker and Docker Compose for containerization. The application is built with a  slice architecture and leverages PostgreSQL as its database , uses Templ, HTMX, Tailwindcss, Alpinejs.
 
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Makefile Commands](#makefile-commands)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Prerequisites
 
@@ -20,6 +11,10 @@ Before you begin, ensure you have the following software installed on your machi
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Make](https://www.gnu.org/software/make/)
+- [Templ](https://templ.guide/quick-start/installation/)
+- [HTMX](https://htmx.org/)
+- [Tailwindcss](https://tailwindcss.com/)
+- [Alpinejs](https://alpinejs.dev/)
 
 ## Installation
 
@@ -29,6 +24,14 @@ Before you begin, ensure you have the following software installed on your machi
     git clone https://github.com/your-username/tc-chat.git
     cd tc-chat
     ```
+3. **Build templ go files**:
+
+   Use the `Makefile` to build the Docker images.
+
+    ```bash
+    make gen
+    ```
+   
 
 2. **Build the Docker images**:
 
