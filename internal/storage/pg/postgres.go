@@ -4,6 +4,8 @@ import (
 	"context"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"log"
+	"log/slog"
+	"os"
 )
 
 type Config struct {
@@ -16,6 +18,18 @@ type Config struct {
 }
 
 func New(cfg Config) (*pgxpool.Pool, error) {
+	// Створюємо новий логер для виводу в консоль
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.LevelInfo, // Встановіть рівень логування
+	}))
+
+	logger.Info(
+		"starting ct-chat",
+		slog.String("env", cfg.Host+":"+cfg.Port),
+		slog.String("env", cfg.DBName+":"+cfg.Username),
+	)
+	cfg.Host = "postgresql" // Використовуйте ім'я сервісу Docker
+	cfg.Port = "5432"       // Стандартний порт для PostgreSQL
 
 	dbURL := "postgres://" + cfg.Username + ":" + cfg.Password + "@" + cfg.Host + ":" + cfg.Port + "/" + cfg.DBName + "?sslmode=" + cfg.SSLMode
 
@@ -36,9 +50,9 @@ func New(cfg Config) (*pgxpool.Pool, error) {
 	}
 
 	// Check connection
-	//if err := pool.Ping(context.Background()); err != nil {
-	//	log.Fatalf("Unable to ping database: %v\n", err)
-	//}
+	if err := pool.Ping(context.Background()); err != nil {
+		log.Fatalf("Unable to ping database: %v\n", err)
+	}
 
 	return pool, nil
 }

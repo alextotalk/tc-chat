@@ -13,7 +13,7 @@ type AuthHandler struct {
 	service *service.AuthService
 }
 
-func (h *AuthHandler) singup(w http.ResponseWriter, r *http.Request) {
+func (h *AuthHandler) singUp(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	tpl := template.Must(template.ParseFiles("templates/auth.html"))
 	if r.Method == http.MethodPost {
@@ -49,9 +49,4 @@ func (h *AuthHandler) login(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
-}
-
-func (h *AuthHandler) initRoutes() {
-	h.mux.HandleFunc("/signup", h.singup)
-	h.mux.HandleFunc("/login", h.login)
 }

@@ -3,9 +3,9 @@ env: "local" #dev, prod
 
 db:
   username: "alex"
-  host: "at-psql"
+  host: "localhost"
   pg_port: "5432"
-  dbname: "apigatway"
+  dbname: "chat"
   sslmode: "disable"
   password: "secret"
 

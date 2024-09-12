@@ -9,7 +9,7 @@ import (
 type Config struct {
 	Env  string `yaml:"env" env:"ENV" env-default:"dev"`
 	Http `yaml:"http"`
-	PgDb `yaml:"chat"`
+	PgDb `yaml:"pg-db"`
 }
 
 type PgDb struct {

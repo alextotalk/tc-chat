@@ -1,4 +1,4 @@
-
+[![Makefile CI](https://github.com/alextotalk/tc-chat/actions/workflows/makefile.yml/badge.svg)](https://github.com/alextotalk/tc-chat/actions/workflows/makefile.yml)
 # TC-Chat Application
 
 This is a Go-based chat application that uses Docker and Docker Compose for containerization. The application is built with a  slice architecture and leverages PostgreSQL as its database , uses Templ, HTMX, Tailwindcss, Alpinejs.

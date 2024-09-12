@@ -2,25 +2,24 @@ package components
 
 templ NavigationTab() {
 <template x-if="open">
-<div   class="relative flex items-start min-h-screen 2xl:px-0 lg:px-4 px-5 pt-0 pb-0 mx-auto mt-1 max-w-7xl  rounded-t-3xl">
-<div @click="open=false"  class="fixed inset-0 z-50 w-screen h-screen bg-white bg-opacity-50 backdrop-blur-sm"></div>
-<aside :class="{ '-translate-x-full -ml-20' : !open, 'z-50 top-0 left-0 pl-4 ease-out duration-300' : 'z-20 top-[55px]' }" class="fixed block w-56 h-screen max-h-screen pt-20 pb-5 pr-5 overflow-scroll bg-white lg:pt-8 lg:pb-16 z-50 top-0 left-0 pl-4 ease-out duration-300">
-<div class="absolute inset-0 flex items-center justify-end w-full h-full">
-<div class="fixed top-[10px] w-px h-full bg-neutral-200"></div>
-</div>
-<h4 class="relative px-2 py-1 mb-2 text-sm font-semibold rounded-md">Getting Started</h4>
-<div class="relative grid grid-flow-row text-sm mb-7 auto-rows-max">
-<a href="/pines/docs/introduction"  class="group flex w-full items-center rounded-md border px-2 py-1.5 hover:underline border-transparent">
-Introduction
-</a> <a href="/pines/docs/how-to-use"  class="group flex w-full items-center rounded-md border px-2 py-1.5 bg-gray-100 border-gray-200/60">
-How to Use
-</a> <a href="/pines/docs/alpine-plugin"  class="group flex w-full items-center rounded-md border px-2 py-1.5 hover:underline border-transparent">
-Alpine Plugin
-</a> <a href="/pines/docs/contribution"   class="group flex w-full items-center rounded-md border px-2 py-1.5 hover:underline border-transparent">
-Contribution
-</a></div>
-</aside>
-</div>
- </template>
-
+    <div   class="relative flex items-start min-h-screen 2xl:px-0 lg:px-4 px-5 pt-0 pb-0 mx-auto mt-1 max-w-7xl  rounded-t-3xl">
+        <div @click="open=false"  class="fixed inset-0 z-50 w-screen h-screen bg-white bg-opacity-50 backdrop-blur-sm"></div>
+        <aside :class="{ '-translate-x-full -ml-20' : !open, 'z-50 top-0 left-0 pl-4 ease-out duration-300' : 'z-20 top-[55px]' }" class="fixed block w-56 h-screen max-h-screen pt-20 pb-5 pr-5 overflow-scroll bg-white lg:pt-8 lg:pb-16 z-50 top-0 left-0 pl-4 ease-out duration-300">
+            <div class="absolute inset-0 flex items-center justify-end w-full h-full">
+                <div class="fixed top-[10px] w-px h-full bg-neutral-200"></div>
+            </div>
+            <h4 class="relative px-2 py-1 mb-2 text-sm font-semibold rounded-md">Getting Started</h4>
+            <div class="relative grid grid-flow-row text-sm mb-7 auto-rows-max">
+                <a href="/pines/docs/introduction"  class="group flex w-full items-center rounded-md border px-2 py-1.5 hover:underline border-transparent">
+                    Introduction
+                </a> <a href="/pines/docs/how-to-use"  class="group flex w-full items-center rounded-md border px-2 py-1.5 bg-gray-100 border-gray-200/60">
+                How to Use
+            </a> <a href="/pines/docs/alpine-plugin"  class="group flex w-full items-center rounded-md border px-2 py-1.5 hover:underline border-transparent">
+                Alpine Plugin
+            </a> <a href="/pines/docs/contribution"   class="group flex w-full items-center rounded-md border px-2 py-1.5 hover:underline border-transparent">
+                Contribution
+            </a></div>
+        </aside>
+    </div>
+</template>
 }

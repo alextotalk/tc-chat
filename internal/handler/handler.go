@@ -2,46 +2,47 @@ package handler
 
 import (
 	"github.com/a-h/templ"
+	"github.com/alextotalk/tc-chat/internal/service"
+	"github.com/alextotalk/tc-chat/templates/components"
 	templates "github.com/alextotalk/tc-chat/templates/home"
 	"net/http"
-
-	"github.com/alextotalk/tc-chat/internal/service"
 )
 
 type Handler struct {
 	services *service.Service
-	mux      *http.ServeMux
 }
 
 func NewHandler(services *service.Service) *Handler {
 	return &Handler{
-		mux:      http.NewServeMux(),
 		services: services,
 	}
 }
 
-//
-//var tpl = template.Must(template.ParseFiles("templates/index.html"))
+func (h *Handler) InitRoutes() *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.Handle("/", templ.Handler(templates.Index()))
 
-//func indexHandler(w http.ResponseWriter, r *http.Request) {
-//	// Pass any necessary data to the template (optional)
-//	users := []domain.User{
-//		{ID: 1, Name: "Alice"},
-//		{ID: 2, Name: "Bob"},
-//	}
-//
-//	data := map[string]interface{}{
-//		"Users": users,
-//	}
-//	tpl.Execute(w, data) // Write to response writer
-//}
+	// Група для базових роутів
+	//mux.Handle("/", UserMiddleware(http.HandlerFunc(homeHandler)))
+	//mux.Handle("/set-name", UserMiddleware(http.HandlerFunc(setNameHandler)))
 
-func (h *Handler) initRoutes() {
-	h.mux.Handle("/", templ.Handler(templates.Index()))
+	// Група для авторизації
+	authMux := http.NewServeMux()
+	alertHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		components.Alert("hi").Render(r.Context(), w)
+	})
+	authMux.HandleFunc("/login", alertHandler)
+	//authMux.HandleFunc("/register", registerHandler)
+	mux.Handle("/auth/", http.StripPrefix("/auth", authMux))
 
+	// Група для чатів (доступна тільки для авторизованих користувачів)
+	//chatMux := http.NewServeMux()
+	//chatMux.HandleFunc("/create", createChatHandler)
+	//chatMux.HandleFunc("/list", listChatHandler)
+	//mux.Handle("/chat/", AuthMiddleware(http.StripPrefix("/chat", chatMux)))
+	return mux
 }
+func loginHandler(w http.ResponseWriter, r *http.Request) {
 
-func (h *Handler) NewRouter() *http.ServeMux {
-	h.initRoutes()
-	return h.mux
+	w.Write([]byte("tokenString"))
 }
