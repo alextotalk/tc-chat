@@ -1,27 +1,42 @@
-name: Deploy to Heroku
+name: heroku
+
 on:
   push:
-    branches:
-      - master  # Або main, залежно від вашої гілки за замовчуванням
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Login to Heroku Container Registry
-        run: heroku container:login
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.23'
 
-      - name: Build and Push Docker Images
-        run: |
-          docker build -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web -f Dockerfile .
-          docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+      - name: Ensure Docker is installed
+        run: docker --version
 
-      - name: Release to Heroku
-        run: heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - name: Install Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
+
+      - name: Run make build
+        run: make build
+
+      - name: Run make up
+        run: make up
+
+
+      - name: Build, Push and Deploy to Heroku #set the whatever name you want to this step
+        id: heroku
+        uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0  # use the latest version of the action
+        with:
+          email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
+          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
+          docker_compose_file: '.' # set the path to the folder where the docker-compose file is located
+          heroku_apps: '[{"imagename":"chat","appname":"app1","apptype":"web"},{"imagename":"chat-psql","appname":"app2","apptype":"worker"}]' # List of Docker Image name, Heroku app and Heroku app type
+          app_name: ''
