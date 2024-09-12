@@ -40,5 +40,5 @@ jobs:
           email: ${{ secrets.HEROKU_EMAIL }}
           api_key: ${{ secrets.HEROKU_API_KEY }}
           docker_compose_file: './docker-compose.yml'
-          heroku_apps: '[{"imagename":"chat","appname":"app1","apptype":"web"},{"imagename":"chat-psql","appname":"app2","apptype":"worker"}]'
+          heroku_apps: '[{"imagename":"tc-chat_app","appname":"chat","apptype":"web"},{"imagename":"postgres:14-alpine","appname":"chat-psql","apptype":"worker"}]'
           app_name: ''
