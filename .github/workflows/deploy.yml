@@ -24,5 +24,3 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "tc-chat"
           heroku_email: "a.zayets1986@gmail.com"
-          usedocker: true
-
