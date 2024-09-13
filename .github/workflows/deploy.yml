@@ -1,25 +1,22 @@
 name: heroku
 
 on:
-  push:
-  #    branches: [ "master" ]
-  pull_request:
-#    branches: [ "master" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.7
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.23'
+      - name: Install Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-      - name: Login to Heroku Container Registry
-        run: echo ${{ secrets.HEROKU_API_KEY }} | docker login --username=_ --password-stdin registry.heroku.com
+      - name: Run make build
+        run: make build
+
+      - name: Run make up
+        run: make up
 
       - name: Build, Push and Deploy to Heroku
         uses: akhileshns/heroku-deploy@master
@@ -27,18 +24,5 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "tc-chat"
           heroku_email: "a.zayets1986@gmail.com"
-          appdir: "tests/test-3"
           usedocker: true
 
-# Uncomment the following steps if Docker or Docker Compose installation is necessary
-#      - name: Ensure Docker is installed
-#        run: docker --version
-#
-#      - name: Install Docker Compose
-#        run: sudo apt-get update && sudo apt-get install -y docker-compose
-#
-#      - name: Run make build
-#        run: make build
-#
-#      - name: Run make up
-#        run: make up
