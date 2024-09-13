@@ -2,12 +2,12 @@ name: heroku
 
 on:
   push:
-#    branches: [ "master" ]
+  #    branches: [ "master" ]
   pull_request:
 #    branches: [ "master" ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -17,18 +17,20 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.23'
+
       - name: Login to Heroku Container Registry
         run: echo ${{ secrets.HEROKU_API_KEY }} | docker login --username=_ --password-stdin registry.heroku.com
 
       - name: Build, Push and Deploy to Heroku
-      - uses: akhileshns/heroku-deploy@master
+        uses: akhileshns/heroku-deploy@master
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "tc-chat"
           heroku_email: "a.zayets1986@gmail.com"
           appdir: "tests/test-3"
           usedocker: true
 
+# Uncomment the following steps if Docker or Docker Compose installation is necessary
 #      - name: Ensure Docker is installed
 #        run: docker --version
 #
@@ -40,6 +42,3 @@ jobs:
 #
 #      - name: Run make up
 #        run: make up
-#
-#      - name: Login to Heroku Container Registry
-#        run: echo ${{ secrets.HEROKU_API_KEY }} | docker login --username=_ --password-stdin registry.heroku.com
