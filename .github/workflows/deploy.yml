@@ -3,11 +3,24 @@ name: heroku
 on:
 
 jobs:
-  deploy:
+name: Makefile CI
+
+on:
+  push:
+  #    branches: [ "master" ]
+  pull_request:
+#    branches: [ "master" ]
+
+jobs:
+  build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v3
+
+      - name: Ensure Docker is installed
+        run: docker --version
 
       - name: Install Docker Compose
         run: sudo apt-get update && sudo apt-get install -y docker-compose
@@ -17,10 +30,3 @@ jobs:
 
       - name: Run make up
         run: make up
-
-      - name: Build, Push and Deploy to Heroku
-        uses: akhileshns/heroku-deploy@master
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "tc-chat"
-          heroku_email: "a.zayets1986@gmail.com"
