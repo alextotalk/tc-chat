@@ -2,9 +2,9 @@ name: heroku
 
 on:
   push:
-    branches: [ "master" ]
+#    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
+#    branches: [ "master" ]
 
 jobs:
   build:
@@ -17,28 +17,29 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.23'
-
-      - name: Ensure Docker is installed
-        run: docker --version
-
-      - name: Install Docker Compose
-        run: sudo apt-get update && sudo apt-get install -y docker-compose
-
-      - name: Run make build
-        run: make build
-
-      - name: Run make up
-        run: make up
-
       - name: Login to Heroku Container Registry
         run: echo ${{ secrets.HEROKU_API_KEY }} | docker login --username=_ --password-stdin registry.heroku.com
 
       - name: Build, Push and Deploy to Heroku
-        id: heroku
-        uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0
+      - uses: akhileshns/heroku-deploy@master
         with:
-          email: ${{ secrets.HEROKU_EMAIL }}
-          api_key: ${{ secrets.HEROKU_API_KEY }}
-          docker_compose_file: './docker-compose.yml'
-          heroku_apps: '[{"imagename":"tc-chat_app","appname":"chat","apptype":"web"},{"imagename":"postgres:14-alpine","appname":"chat-psql","apptype":"worker"}]'
-          app_name: ''
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "tc-chat"
+          heroku_email: "a.zayets1986@gmail.com"
+          appdir: "tests/test-3"
+          usedocker: true
+
+#      - name: Ensure Docker is installed
+#        run: docker --version
+#
+#      - name: Install Docker Compose
+#        run: sudo apt-get update && sudo apt-get install -y docker-compose
+#
+#      - name: Run make build
+#        run: make build
+#
+#      - name: Run make up
+#        run: make up
+#
+#      - name: Login to Heroku Container Registry
+#        run: echo ${{ secrets.HEROKU_API_KEY }} | docker login --username=_ --password-stdin registry.heroku.com
