@@ -25,11 +25,11 @@ func New(cfg Config) (*pgxpool.Pool, error) {
 
 	logger.Info(
 		"starting ct-chat",
-		slog.String("env", cfg.Host+":"+cfg.Port),
-		slog.String("env", cfg.DBName+":"+cfg.Username),
+		slog.String("Host:Port", cfg.Host+":"+cfg.Port),
+		slog.String("DB_Name:DB_UserName", cfg.DBName+":"+cfg.Username),
 	)
-	cfg.Host = "postgresql" // Використовуйте ім'я сервісу Docker
-	cfg.Port = "5432"       // Стандартний порт для PostgreSQL
+	//cfg.Host = "postgresql" // Використовуйте ім'я сервісу Docker
+	//cfg.Port = "5432"       // Стандартний порт для PostgreSQL
 
 	dbURL := "postgres://" + cfg.Username + ":" + cfg.Password + "@" + cfg.Host + ":" + cfg.Port + "/" + cfg.DBName + "?sslmode=" + cfg.SSLMode
 

@@ -41,12 +41,12 @@ func Run() {
 
 	// Initialize database
 	pgDB, err := pg.New(pg.Config{
-		Host:     cfg.PgHost,
-		Port:     cfg.PgPort,
-		Username: cfg.PgUser,
-		DBName:   cfg.PgName,
-		SSLMode:  cfg.SSLMode,
-		Password: cfg.PgPassword,
+		Host:     cfg.PgDb.PgHost,
+		Port:     cfg.PgDb.PgPort,
+		Username: cfg.PgDb.PgUser,
+		DBName:   cfg.PgDb.PgName,
+		SSLMode:  cfg.PgDb.SSLMode,
+		Password: cfg.PgDb.PgPassword,
 	})
 	if err != nil {
 		log.Error("Failed to initialize database: %s", err)
