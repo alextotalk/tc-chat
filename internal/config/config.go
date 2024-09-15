@@ -31,8 +31,9 @@ func MustLoad() Config {
 	configPath := os.Getenv("CONFIG_PATH")
 
 	if configPath == "" {
-		log.Fatalf("CONFIG_PATH not set %s", configPath)
+		configPath = "/usr/local/src/local.yaml"
 	}
+
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
 		log.Fatalf("Config file does not exist: %s", err)
 	}
