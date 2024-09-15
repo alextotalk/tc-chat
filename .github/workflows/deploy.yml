@@ -5,28 +5,24 @@ on:
   #    branches: [ "master" ]
   pull_request:
 #    branches: [ "master" ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.23'
-
-      - name: Ensure Docker is installed
-        run: docker --version
+          cache: false  # Вимкнути кешування, щоб уникнути застереження
 
       - name: Install Docker Compose
-        run: sudo apt-get update && sudo apt-get install -y docker-compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
 
-      - name: Run make build
-        run: make build
-
-      - name: Run make up
-        run: make up
+      - name: Build and Run Services
+        run: |
+          docker-compose build
+          docker-compose up -d
