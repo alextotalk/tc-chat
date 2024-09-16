@@ -17,5 +17,8 @@ sleep 5
 # Наприклад:
 # su - postgres -c "psql -U $POSTGRES_USER -d $POSTGRES_DB -f /path/to/init.sql"
 
+# Створюємо базу даних, якщо вона не існує
+su - postgres -c "psql -c \"CREATE DATABASE chat;\""
+
 # Запускаємо Go-додаток
 /app

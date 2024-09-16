@@ -3,7 +3,7 @@ env: "local" #dev, prod
 
 pg-db:
   username: "alex"
-  host: "postgresql"
+  host: "localhost"
   pg_port: "5432"
   dbname: "chat"
   sslmode: "disable"
