@@ -1,5 +1,5 @@
 # Етап 1: Будуємо Go-додаток
-FROM golang:1.20-alpine AS builder
+FROM golang:1.23-alpine AS builder
 
 # Встановлюємо робочу директорію всередині контейнера
 WORKDIR /usr/local/src
