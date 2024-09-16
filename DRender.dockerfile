@@ -43,6 +43,9 @@ WORKDIR /usr/local/src
 COPY --from=builder /usr/local/src/bin/app /app
 
 # Копіюємо конфігураційні файли та шаблони
+
+# Копіюємо файл конфігурації до очікуваного шляху
+COPY config/local.yaml /usr/local/src/local.yaml
 COPY config/ config/
 COPY templates/ templates/
 

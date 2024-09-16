@@ -10,6 +10,9 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Копируем исходные коды проекта
+
+# Копіюємо файл конфігурації до очікуваного шляху
+COPY config/local.yaml /usr/local/src/local.yaml
 COPY cmd/ cmd/
 COPY config/ config/
 COPY internal/ internal/
