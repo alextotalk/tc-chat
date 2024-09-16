@@ -23,7 +23,7 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
     ports:
-      - "10000:5432"
+      - "5432:5432"
     networks:
       - chat
 

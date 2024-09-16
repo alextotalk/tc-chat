@@ -28,7 +28,7 @@ ENV CONFIG_PATH=/usr/local/src/local.yaml \
     PGDATA=/var/lib/postgresql/data
 
 # Виставляємо порти
-EXPOSE 8080 5432
+EXPOSE 8080
 
 # Встановлюємо необхідні пакети
 RUN apk --no-cache add bash postgresql postgresql-contrib
