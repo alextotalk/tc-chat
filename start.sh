@@ -8,8 +8,7 @@ if [ ! -d "$PGDATA" ]; then
 fi
 
 # Запускаємо PostgreSQL у фоновому режимі
-su - postgres -c "/usr/bin/pg_ctl -D '$PGDATA' -w start"
-
+su - postgres -c "/usr/bin/pg_ctl -D '$PGDATA' -o '-p 10000' -w start"
 # Чекаємо, поки PostgreSQL запуститься
 sleep 5
 
