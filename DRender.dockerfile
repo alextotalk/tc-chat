@@ -3,55 +3,20 @@ FROM golang:1.23-alpine AS builder
 
 # Встановлюємо робочу директорію всередині контейнера
 WORKDIR /usr/local/src
-
-# Встановлюємо необхідні пакети
-RUN apk --no-cache add bash git make gcc musl-dev
-
-# Копіюємо файли go.mod та go.sum та завантажуємо залежності
-COPY go.mod go.sum ./
-RUN go mod download
-
 # Копіюємо решту коду додатку
 COPY . .
+# Встановлюємо необхідні пакети
+RUN apk --no-cache add bash git make gcc musl-dev curl \
+    && curl -fsSL https://get.docker.com -o get-docker.sh \
+    && sh get-docker.sh \
+    && rm get-docker.sh \
+    && apk --no-cache add docker-compose
 
-# Будуємо Go-додаток
-RUN go build -o ./bin/app ./cmd/app/main.go
+Run docker-compose build
 
-# Етап 2: Створюємо фінальний образ
-FROM alpine:latest
+Run	docker-compose up -d
 
-# Встановлюємо змінні середовища для PostgreSQL та додатку
-ENV CONFIG_PATH=/usr/local/src/local.yaml \
-    POSTGRES_DB=postgresql \
-    POSTGRES_USER=alex \
-    POSTGRES_PASSWORD=secret \
-    PGDATA=/var/lib/postgresql/data
 
 # Виставляємо порти
 EXPOSE 8080
 
-# Встановлюємо необхідні пакети
-RUN apk --no-cache add bash postgresql postgresql-contrib
-
-# Створюємо необхідні директорії та встановлюємо права доступу
-RUN mkdir -p /run/postgresql && chown -R postgres:postgres /run/postgresql /var/lib/postgresql
-
-# Встановлюємо робочу директорію
-WORKDIR /usr/local/src
-
-# Копіюємо скомпільований Go-додаток з попереднього етапу
-COPY --from=builder /usr/local/src/bin/app /app
-
-# Копіюємо конфігураційні файли та шаблони
-
-# Копіюємо файл конфігурації до очікуваного шляху
-COPY config/local.yaml /usr/local/src/local.yaml
-COPY config/ config/
-COPY templates/ templates/
-
-# Копіюємо скрипт start.sh та надаємо права на виконання
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
-# Вказуємо команду запуску
-CMD ["/start.sh"]
