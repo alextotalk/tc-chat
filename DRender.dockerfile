@@ -1,5 +1,5 @@
 # Базовий образ для збірки
-FROM golang:1.20-alpine AS builder
+FROM golang:1.23.0-alpine AS builder
 
 # Встановлюємо робочу директорію
 WORKDIR /app
