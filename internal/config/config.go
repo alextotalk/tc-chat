@@ -13,12 +13,12 @@ type Config struct {
 }
 
 type PgDb struct {
-	PgHost     string `yaml:"host" env:"HOST" env-default:"postgresql"`
-	PgPort     string `yaml:"pg_port" env:"PORT" env-default:"5432"`
-	PgName     string `yaml:"dbname" env:"NAME" env-default:"dbNamePg"`
-	PgUser     string `yaml:"username" env:"USER" env-default:"alex"`
-	PgPassword string `yaml:"password" env:"PASSWORD" env-default:"secret"`
-	SSLMode    string `yaml:"sslmode" env:"SSL_MODE" env-default:"disable"`
+	PgHost     string `yaml:"host" env:"PG_HOST" env-default:"postgresql"`
+	PgPort     string `yaml:"pg_port" env:"PG_PORT" env-default:"5432"`
+	PgName     string `yaml:"dbname" env:"PG_DB" env-default:"dbNamePg"`
+	PgUser     string `yaml:"username" env:"PG_USER" env-default:"alex"`
+	PgPassword string `yaml:"password" env:"PG_PASSWORD" env-default:"secret"`
+	SSLMode    string `yaml:"sslmode" env:"PG_SSLMODE" env-default:"disable"`
 }
 
 type Http struct {

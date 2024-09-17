@@ -26,7 +26,7 @@ FROM alpine AS runner
 
 # Копируем бинарный файл из фазы сборки
 COPY --from=builder /usr/local/src/bin/app /app
-
+#
 # Копируем конфигурацию и шаблоны
 COPY config/local.yaml /usr/local/src/
 COPY templates/ /usr/local/src/templates/

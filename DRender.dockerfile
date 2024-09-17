@@ -1,22 +1,37 @@
-# Етап 1: Будуємо Go-додаток
-FROM golang:1.23-alpine AS builder
+# Базовий образ для збірки
+FROM golang:1.20-alpine AS builder
 
-# Встановлюємо робочу директорію всередині контейнера
-WORKDIR /usr/local/src
-# Копіюємо решту коду додатку
+# Встановлюємо робочу директорію
+WORKDIR /app
+
+# Копіюємо файли модулів та завантажуємо залежності
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Копіюємо весь код
 COPY . .
-# Встановлюємо необхідні пакети
-RUN apk --no-cache add bash git make gcc musl-dev curl \
-    && curl -fsSL https://get.docker.com -o get-docker.sh \
-    && sh get-docker.sh \
-    && rm get-docker.sh \
-    && apk --no-cache add docker-compose
 
-Run docker-compose build
+# Збираємо додаток
+RUN go build -o app ./cmd/app/main.go
 
-Run	docker-compose up -d
+# Фінальний образ
+FROM alpine:latest
 
+# Встановлюємо робочу директорію
+WORKDIR /app
 
-# Виставляємо порти
+# Копіюємо зібраний додаток
+COPY --from=builder /app/app .
+
+# Копіюємо необхідні файли (якщо потрібно)
+COPY templates/ ./templates/
+COPY config/ ./config/
+
+# Встановлюємо змінні середовища
+ENV CONFIG_PATH=/app/config/prod.yaml
+
+# Відкриваємо порт
 EXPOSE 8080
 
+# Команда для запуску додатка
+CMD ["./app"]

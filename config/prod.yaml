@@ -1,0 +1,15 @@
+env: "prod"
+
+
+pg-db:
+  host: "dpg-crkkg508fa8c738fr490-a"
+  pg_port: "5432"
+  username: "alex"
+  dbname: "db_postgres_nout"
+  sslmode: "require"
+  password: ""
+
+http:
+  port: "8080"
+  timeout: "4s"
+  idle_timeout: "10s"
