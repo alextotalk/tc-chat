@@ -1,6 +1,6 @@
 module github.com/alextotalk/tc-chat
 
-go 1.23
+go 1.23.0
 
 require (
 	github.com/a-h/templ v0.2.778

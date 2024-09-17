@@ -13,9 +13,9 @@ type Config struct {
 }
 
 type PgDb struct {
-	PgHost     string `yaml:"host" env:"HOST" env-default:"localhost"`
+	PgHost     string `yaml:"host" env:"HOST" env-default:"postgresql"`
 	PgPort     string `yaml:"pg_port" env:"PORT" env-default:"5432"`
-	PgName     string `yaml:"dbname" env:"NAME" env-default:"chat"`
+	PgName     string `yaml:"dbname" env:"NAME" env-default:"dbNamePg"`
 	PgUser     string `yaml:"username" env:"USER" env-default:"alex"`
 	PgPassword string `yaml:"password" env:"PASSWORD" env-default:"secret"`
 	SSLMode    string `yaml:"sslmode" env:"SSL_MODE" env-default:"disable"`

@@ -2,10 +2,10 @@ env: "local" #dev, prod
 
 
 pg-db:
-  username: "alex"
-  host: "localhost"
+  host: "hostPg"
   pg_port: "5432"
-  dbname: "chat"
+  username: "alex"
+  dbname: "dbNamePg"
   sslmode: "disable"
   password: "secret"
 

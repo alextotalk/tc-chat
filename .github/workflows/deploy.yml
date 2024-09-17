@@ -14,7 +14,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.23'
+          go-version: '1.23.0'
           cache: false  # Вимкнути кешування, щоб уникнути застереження
 
       - name: Install Docker Compose
