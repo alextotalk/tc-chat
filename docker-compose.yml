@@ -25,6 +25,15 @@ services:
     networks:
       - chat
 
+  echo_redis:
+    image: redis
+    container_name: chat-redis
+    restart: unless-stopped
+    ports:
+    - "127.0.0.1:6379:6379"
+    networks:
+    - chat
+
 networks:
   chat:
     driver: bridge
