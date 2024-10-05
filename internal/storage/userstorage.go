@@ -67,6 +67,35 @@ func (r *UserRepository) AppendUser(ctx context.Context, user domain.User) error
 	return nil
 }
 
+func (r *UserRepository) UpdateUser(ctx context.Context, currentEmail string, user domain.User) error {
+	query := `UPDATE user
+	SET (@name, @email, @phone, @password) WHERE email = ` + currentEmail
+	args := pgx.NamedArgs{
+		"name":     user.Name,
+		"email":    user.Email,
+		"phone":    user.Phone,
+		"password": user.Password,
+	}
+
+	_, err := r.db.Exec(ctx, query, args)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *UserRepository) UpdateRole(ctx context.Context, role string, email string) error {
+	query := `UPDATE user SET (@role) WHERE email = ` + email
+	args := pgx.NamedArgs{
+		"role": role,
+	}
+	_, err := r.db.Exec(ctx, query, args)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *UserRepository) DeleteUser(ctx context.Context, email string) error {
 	query := `DELETE FROM user WHERE email = @email`
 	args := pgx.NamedArgs{

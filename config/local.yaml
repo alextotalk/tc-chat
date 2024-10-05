@@ -13,3 +13,7 @@ http:
   port: "8080"
   timeout: "4s"
   idle_timeout: "10s"
+
+redis:
+  host: "redis-tc-chat"
+  port: "6379"
