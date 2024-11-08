@@ -15,7 +15,7 @@ type AuthHandler struct {
 
 func (h *AuthHandler) singup(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	tpl := template.Must(template.ParseFiles("templates/auth.html"))
+	tpl := template.Must(template.ParseFiles("components/logIN.templ"))
 	if r.Method == http.MethodPost {
 		name := r.FormValue("name")
 		email := r.FormValue("email")
@@ -25,6 +25,19 @@ func (h *AuthHandler) singup(w http.ResponseWriter, r *http.Request) {
 		err := h.service.Singup(ctx, name, email, password, phone)
 		if err != nil {
 		}
+		tokenString, err := h.service.CreateToken(email)
+		if err != nil {
+			log.Println("Tokrn is not created: ", err)
+		}
+		log.Print("Token created: ", tokenString)
+		cookie := &http.Cookie{
+			Name:     tokenString, // <- should be any unique key you want
+			Value:    "encoded",   // <- the token after encoded by SecureCookie
+			Path:     "/",
+			Secure:   true,
+			HttpOnly: true,
+		}
+		http.SetCookie(w, cookie)
 		tpl.Execute(w, struct{ Success bool }{true})
 		// Successful login, redirect to a welcome page.
 		http.Redirect(w, r, "/", http.StatusSeeOther)
@@ -33,7 +46,7 @@ func (h *AuthHandler) singup(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AuthHandler) login(w http.ResponseWriter, r *http.Request) {
-	tpl := template.Must(template.ParseFiles("templates/login.html"))
+	tpl := template.Must(template.ParseFiles("components/logIN.templ"))
 	ctx := r.Context()
 	if r.Method == http.MethodPost {
 		email := r.FormValue("email")
@@ -43,6 +56,19 @@ func (h *AuthHandler) login(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println("Something went wrong: ", err)
 		}
+		tokenString, err := h.service.CreateToken(email)
+		if err != nil {
+			log.Println("Tokrn is not created: ", err)
+		}
+		log.Print("Token created: ", tokenString)
+		cookie := &http.Cookie{
+			Name:     tokenString, // <- should be any unique key you want
+			Value:    "encoded",   // <- the token after encoded by SecureCookie
+			Path:     "/",
+			Secure:   true,
+			HttpOnly: true,
+		}
+		http.SetCookie(w, cookie)
 		// Successful login, redirect to a welcome page.
 		tpl.Execute(w, struct{ Success bool }{true})
 		// Successful login, redirect to a welcome page.

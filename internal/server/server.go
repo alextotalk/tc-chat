@@ -8,6 +8,7 @@ import (
 type Server struct {
 	mux    *http.ServeMux
 	server *http.Server
+	
 }
 
 func NewServer(handler *http.ServeMux) *Server {
