@@ -8,7 +8,8 @@ import (
 type Server struct {
 	mux    *http.ServeMux
 	server *http.Server
-	
+  
+
 }
 
 func NewServer(handler *http.ServeMux) *Server {
@@ -17,6 +18,14 @@ func NewServer(handler *http.ServeMux) *Server {
 			Addr:    ":8080",
 			Handler: handler,
 		},
+		router := mux.NewRouter()
+
+ // Define the endpoints for CRUD operations
+ router.HandleFunc("/items", getItems).Methods("GET")
+ router.HandleFunc("/items/{id}", getItem).Methods("GET")
+ router.HandleFunc("/items", createItem).Methods("POST")
+ router.HandleFunc("/items/{id}", updateItem).Methods("PUT")
+ router.HandleFunc("/items/{id}", deleteItem).Methods("DELETE"
 	}
 }
 
