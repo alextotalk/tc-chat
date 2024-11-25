@@ -15,7 +15,7 @@ type AuthHandler struct {
 
 func (h *AuthHandler) singup(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	tpl := template.Must(template.ParseFiles("templates/auth.html"))
+	tpl := template.Must(template.ParseFiles("components/logIN.templ"))
 	if r.Method == http.MethodPost {
 		name := r.FormValue("name")
 		email := r.FormValue("email")
@@ -46,7 +46,7 @@ func (h *AuthHandler) singup(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AuthHandler) login(w http.ResponseWriter, r *http.Request) {
-	tpl := template.Must(template.ParseFiles("templates/login.html"))
+	tpl := template.Must(template.ParseFiles("components/logIN.templ"))
 	ctx := r.Context()
 	if r.Method == http.MethodPost {
 		email := r.FormValue("email")
